@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0002-user-preferences-and-fk
+      author: junie
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column: {name: nationality, type: VARCHAR(80)}
+              - column: {name: favourite_team_id, type: BIGINT}
+        - addForeignKeyConstraint:
+            baseTableName: users
+            baseColumnNames: favourite_team_id
+            referencedTableName: basketball_team
+            referencedColumnNames: id
+            constraintName: fk_user_favourite_team

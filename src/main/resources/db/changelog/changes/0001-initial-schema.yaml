@@ -1,0 +1,329 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001-initial
+      author: junie
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: username, type: VARCHAR(50), constraints: {nullable: false, unique: true}}
+              - column: {name: email, type: VARCHAR(120), constraints: {nullable: false, unique: true}}
+              - column: {name: password_hash, type: VARCHAR(255), constraints: {nullable: false}}
+              - column: {name: role, type: VARCHAR(20), constraints: {nullable: false}}
+              - column: {name: active, type: BOOLEAN, constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+              - column: {name: updated_at, type: TIMESTAMP WITH TIME ZONE}
+        - createTable:
+            tableName: basketball_team
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: name, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: short_name, type: VARCHAR(10)}
+              - column: {name: city, type: VARCHAR(100)}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+        - addUniqueConstraint:
+            tableName: basketball_team
+            columnNames: name
+            constraintName: uq_basketball_team_name
+        - createTable:
+            tableName: basketball_player
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: first_name, type: VARCHAR(80), constraints: {nullable: false}}
+              - column: {name: last_name, type: VARCHAR(80), constraints: {nullable: false}}
+              - column: {name: position, type: VARCHAR(5), constraints: {nullable: false}}
+              - column: {name: team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: nationality, type: VARCHAR(80)}
+              - column: {name: market_value, type: "NUMERIC(12,2)"}
+              - column: {name: active, type: BOOLEAN, constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+              - column: {name: updated_at, type: TIMESTAMP WITH TIME ZONE}
+        - addForeignKeyConstraint:
+            baseTableName: basketball_player
+            baseColumnNames: team_id
+            referencedTableName: basketball_team
+            referencedColumnNames: id
+            constraintName: fk_player_team
+        - createTable:
+            tableName: game_week
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: number, type: INT, constraints: {nullable: false}}
+              - column: {name: start_date, type: DATE}
+              - column: {name: end_date, type: DATE}
+              - column: {name: status, type: VARCHAR(20), constraints: {nullable: false}}
+        - addUniqueConstraint:
+            tableName: game_week
+            columnNames: number
+            constraintName: uq_game_week_number
+        - createTable:
+            tableName: match
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: game_week_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: home_team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: away_team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: kickoff, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+              - column: {name: home_score, type: INT}
+              - column: {name: away_score, type: INT}
+              - column: {name: venue, type: VARCHAR(255)}
+              - column: {name: status, type: VARCHAR(20), constraints: {nullable: false}}
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: game_week_id
+            referencedTableName: game_week
+            referencedColumnNames: id
+            constraintName: fk_match_gw
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: home_team_id
+            referencedTableName: basketball_team
+            referencedColumnNames: id
+            constraintName: fk_match_home
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: away_team_id
+            referencedTableName: basketball_team
+            referencedColumnNames: id
+            constraintName: fk_match_away
+        - createTable:
+            tableName: player_performance
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: match_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: player_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: minutes, type: INT}
+              - column: {name: points, type: INT}
+              - column: {name: rebounds, type: INT}
+              - column: {name: assists, type: INT}
+              - column: {name: steals, type: INT}
+              - column: {name: blocks, type: INT}
+              - column: {name: turnovers, type: INT}
+              - column: {name: fg_made, type: INT}
+              - column: {name: fg_attempted, type: INT}
+              - column: {name: three_made, type: INT}
+              - column: {name: three_attempted, type: INT}
+              - column: {name: ft_made, type: INT}
+              - column: {name: ft_attempted, type: INT}
+              - column: {name: fantasy_points, type: INT}
+        - addUniqueConstraint:
+            tableName: player_performance
+            columnNames: match_id, player_id
+            constraintName: uq_perf_match_player
+        - addForeignKeyConstraint:
+            baseTableName: player_performance
+            baseColumnNames: match_id
+            referencedTableName: match
+            referencedColumnNames: id
+            constraintName: fk_perf_match
+        - addForeignKeyConstraint:
+            baseTableName: player_performance
+            baseColumnNames: player_id
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            constraintName: fk_perf_player
+        - createTable:
+            tableName: fantasy_team
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: team_name, type: VARCHAR(100), constraints: {nullable: false}}
+              - column: {name: owner_user_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: budget, type: "NUMERIC(12,2)", constraints: {nullable: false}}
+              - column: {name: total_points, type: INT, constraints: {nullable: false}}
+              - column: {name: transfers_remaining, type: INT, constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+              - column: {name: updated_at, type: TIMESTAMP WITH TIME ZONE}
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_team
+            baseColumnNames: owner_user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_team_owner
+        - createTable:
+            tableName: fantasy_league
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: name, type: VARCHAR(120), constraints: {nullable: false}}
+              - column: {name: type, type: VARCHAR(20), constraints: {nullable: false}}
+              - column: {name: invite_code, type: VARCHAR(64)}
+              - column: {name: created_by_user_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
+        - addUniqueConstraint:
+            tableName: fantasy_league
+            columnNames: invite_code
+            constraintName: uq_league_invite_code
+            validate: false
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_league
+            baseColumnNames: created_by_user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_league_creator
+        - createTable:
+            tableName: fantasy_league_team
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: league_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: total_points, type: INT}
+              - column: {name: rank, type: INT}
+              - column: {name: joined_at, type: TIMESTAMP WITH TIME ZONE}
+        - addUniqueConstraint:
+            tableName: fantasy_league_team
+            columnNames: league_id, team_id
+            constraintName: uq_league_team
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_league_team
+            baseColumnNames: league_id
+            referencedTableName: fantasy_league
+            referencedColumnNames: id
+            constraintName: fk_league_team_league
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_league_team
+            baseColumnNames: team_id
+            referencedTableName: fantasy_team
+            referencedColumnNames: id
+            constraintName: fk_league_team_team
+        - createTable:
+            tableName: fantasy_team_player
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: fantasy_team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: player_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: purchase_price, type: "NUMERIC(12,2)", constraints: {nullable: false}}
+              - column: {name: active, type: BOOLEAN, constraints: {nullable: false}}
+              - column: {name: acquired_at, type: TIMESTAMP WITH TIME ZONE}
+              - column: {name: released_at, type: TIMESTAMP WITH TIME ZONE}
+        - addUniqueConstraint:
+            tableName: fantasy_team_player
+            columnNames: fantasy_team_id, player_id, active
+            constraintName: uq_team_player_active
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_team_player
+            baseColumnNames: fantasy_team_id
+            referencedTableName: fantasy_team
+            referencedColumnNames: id
+            constraintName: fk_team_player_team
+        - addForeignKeyConstraint:
+            baseTableName: fantasy_team_player
+            baseColumnNames: player_id
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            constraintName: fk_team_player_player
+        - createTable:
+            tableName: lineup
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: fantasy_team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: game_week_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE}
+        - addUniqueConstraint:
+            tableName: lineup
+            columnNames: fantasy_team_id, game_week_id
+            constraintName: uq_lineup_team_gw
+        - addForeignKeyConstraint:
+            baseTableName: lineup
+            baseColumnNames: fantasy_team_id
+            referencedTableName: fantasy_team
+            referencedColumnNames: id
+            constraintName: fk_lineup_team
+        - addForeignKeyConstraint:
+            baseTableName: lineup
+            baseColumnNames: game_week_id
+            referencedTableName: game_week
+            referencedColumnNames: id
+            constraintName: fk_lineup_gw
+        - createTable:
+            tableName: lineup_slot
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: lineup_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: player_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: starter, type: BOOLEAN, constraints: {nullable: false}}
+              - column: {name: slot_position, type: VARCHAR(5)}
+        - addForeignKeyConstraint:
+            baseTableName: lineup_slot
+            baseColumnNames: lineup_id
+            referencedTableName: lineup
+            referencedColumnNames: id
+            constraintName: fk_lineup_slot_lineup
+        - addForeignKeyConstraint:
+            baseTableName: lineup_slot
+            baseColumnNames: player_id
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            constraintName: fk_lineup_slot_player
+        - createTable:
+            tableName: transfer
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: fantasy_team_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: game_week_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: player_out_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: player_in_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: price_difference, type: "NUMERIC(12,2)"}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE}
+        - addForeignKeyConstraint:
+            baseTableName: transfer
+            baseColumnNames: fantasy_team_id
+            referencedTableName: fantasy_team
+            referencedColumnNames: id
+            constraintName: fk_transfer_team
+        - addForeignKeyConstraint:
+            baseTableName: transfer
+            baseColumnNames: game_week_id
+            referencedTableName: game_week
+            referencedColumnNames: id
+            constraintName: fk_transfer_gw
+        - addForeignKeyConstraint:
+            baseTableName: transfer
+            baseColumnNames: player_out_id
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            constraintName: fk_transfer_out
+        - addForeignKeyConstraint:
+            baseTableName: transfer
+            baseColumnNames: player_in_id
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            constraintName: fk_transfer_in
+        - createTable:
+            tableName: scoring_rule
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: metric, type: VARCHAR(40), constraints: {nullable: false}}
+              - column: {name: points_per_unit, type: "NUMERIC(6,2)", constraints: {nullable: false}}
+        - addUniqueConstraint:
+            tableName: scoring_rule
+            columnNames: metric
+            constraintName: uq_scoring_metric
+        - createTable:
+            tableName: league_invitation
+            columns:
+              - column: {name: id, type: BIGSERIAL, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: league_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: invited_by_user_id, type: BIGINT, constraints: {nullable: false}}
+              - column: {name: email, type: VARCHAR(120), constraints: {nullable: false}}
+              - column: {name: token, type: VARCHAR(64), constraints: {nullable: false}}
+              - column: {name: status, type: VARCHAR(20), constraints: {nullable: false}}
+              - column: {name: created_at, type: TIMESTAMP WITH TIME ZONE}
+              - column: {name: responded_at, type: TIMESTAMP WITH TIME ZONE}
+        - addForeignKeyConstraint:
+            baseTableName: league_invitation
+            baseColumnNames: league_id
+            referencedTableName: fantasy_league
+            referencedColumnNames: id
+            constraintName: fk_invitation_league
+        - addForeignKeyConstraint:
+            baseTableName: league_invitation
+            baseColumnNames: invited_by_user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_invitation_user
+        - createIndex:
+            tableName: league_invitation
+            indexName: idx_invite_token
+            columns:
+              - column:
+                  name: token
