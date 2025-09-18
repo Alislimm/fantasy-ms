@@ -9,4 +9,5 @@ import java.util.List;
 public interface BasketballPlayerRepository extends JpaRepository<BasketballPlayer, Long> {
     List<BasketballPlayer> findByPosition(PlayerPosition position);
     List<BasketballPlayer> findByActiveTrue();
+    List<BasketballPlayer> findByTeamIdAndActiveTrue(Long teamId);
 }

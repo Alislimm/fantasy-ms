@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: fantasy-system
+      changes:
+        - createTable:
+            tableName: player_price_history
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: player_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: game_week_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: old_price
+                  type: DECIMAL(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: new_price
+                  type: DECIMAL(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_change
+                  type: DECIMAL(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ownership_percentage
+                  type: DECIMAL(5,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: performance_score
+                  type: DECIMAL(8,2)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reason
+                  type: VARCHAR(500)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: player_price_history
+            baseColumnNames: player_id
+            constraintName: fk_player_price_history_player
+            referencedTableName: basketball_player
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: player_price_history
+            baseColumnNames: game_week_id
+            constraintName: fk_player_price_history_game_week
+            referencedTableName: game_week
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - createIndex:
+            tableName: player_price_history
+            indexName: idx_player_price_history_player_id
+            columns:
+              - column:
+                  name: player_id
+        - createIndex:
+            tableName: player_price_history
+            indexName: idx_player_price_history_game_week_id
+            columns:
+              - column:
+                  name: game_week_id
+        - createIndex:
+            tableName: player_price_history
+            indexName: idx_player_price_history_created_at
+            columns:
+              - column:
+                  name: created_at

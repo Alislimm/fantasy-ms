@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransferRepository extends JpaRepository<Transfer, Long> {
     long countByFantasyTeamAndGameWeek(FantasyTeam team, GameWeek gw);
+    long countByFantasyTeamId(Long fantasyTeamId);
 }

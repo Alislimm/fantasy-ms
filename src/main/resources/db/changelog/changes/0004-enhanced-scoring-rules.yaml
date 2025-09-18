@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: fantasy-system
+      changes:
+        - insert:
+            tableName: scoring_rule
+            columns:
+              - column:
+                  name: metric
+                  value: DOUBLE_DOUBLE
+              - column:
+                  name: points_per_unit
+                  valueNumeric: 5.00
+        - insert:
+            tableName: scoring_rule
+            columns:
+              - column:
+                  name: metric
+                  value: TRIPLE_DOUBLE
+              - column:
+                  name: points_per_unit
+                  valueNumeric: 10.00
+        - insert:
+            tableName: scoring_rule
+            columns:
+              - column:
+                  name: metric
+                  value: FG_EFFICIENCY_BONUS
+              - column:
+                  name: points_per_unit
+                  valueNumeric: 3.00
+        - insert:
+            tableName: scoring_rule
+            columns:
+              - column:
+                  name: metric
+                  value: FT_EFFICIENCY_BONUS
+              - column:
+                  name: points_per_unit
+                  valueNumeric: 2.00
