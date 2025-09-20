@@ -3,3 +3,9 @@ databaseChangeLog:
       file: db/changelog/changes/0001-initial-schema.yaml
   - include:
       file: db/changelog/changes/0002-user-preferences-and-fk.yaml
+  - include:
+      file: db/changelog/changes/0003-player-price-history.yaml
+  - include:
+      file: db/changelog/changes/0004-enhanced-scoring-rules.yaml
+  - include:
+      file: db/changelog/changes/0005-user-fantasy-team-restriction.yaml

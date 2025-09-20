@@ -55,6 +55,12 @@ public class FantasyTeamService {
 
     public FantasyTeam createTeam(FantasyDtos.FantasyTeamCreateRequest req) {
         User owner = userService.getUser(req.ownerUserId());
+        
+        // Check if user already has a fantasy team
+        if (owner.isHasFantasyTeam()) {
+            throw new ValidationException("User already has a fantasy team. Each user can only have one fantasy team.");
+        }
+        
         FantasyTeam t = new FantasyTeam();
         t.setOwner(owner);
         t.setTeamName(req.teamName());
@@ -62,6 +68,10 @@ public class FantasyTeamService {
         t.setTotalPoints(0);
         t.setTransfersRemaining(1);
         t = teamRepo.save(t);
+
+        // Update user's hasFantasyTeam flag
+        owner.setHasFantasyTeam(true);
+        userService.save(owner);
 
         // Auto-join leagues: overall, favourite team, nationality
         ensureAndJoinLeagues(owner, t);

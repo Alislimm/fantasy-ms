@@ -60,6 +60,10 @@ public class User {
     @Column(length = 80)
     private String nationality;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private boolean hasFantasyTeam = false;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     @JsonIgnore

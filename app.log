@@ -78,3 +78,4 @@ Execution failed for task ':bootRun'.
 
 BUILD FAILED in 2m 48s
 4 actionable tasks: 4 executed
+Exception in thread "Thread-0" org.gradle.api.UncheckedIOException: java.io.IOException: Input/output error

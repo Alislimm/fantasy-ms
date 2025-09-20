@@ -4,6 +4,8 @@ import com.example.fantasy.domain.BasketballPlayer;
 import com.example.fantasy.domain.BasketballTeam;
 import com.example.fantasy.repository.BasketballPlayerRepository;
 import com.example.fantasy.repository.BasketballTeamRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/teams")
 public class TeamController {
 
+    private static final Logger logger = LoggerFactory.getLogger(TeamController.class);
     private final BasketballTeamRepository teamRepo;
     private final BasketballPlayerRepository playerRepo;
 

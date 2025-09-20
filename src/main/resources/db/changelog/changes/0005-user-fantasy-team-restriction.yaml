@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0005-add-has-fantasy-team-column
+      author: system
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: has_fantasy_team
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - sql:
+            sql: UPDATE users SET has_fantasy_team = true WHERE id IN (SELECT DISTINCT owner_user_id FROM fantasy_team);
+      rollback:
+        - dropColumn:
+            tableName: users
+            columnName: has_fantasy_team
