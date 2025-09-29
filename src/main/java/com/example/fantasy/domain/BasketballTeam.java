@@ -1,5 +1,6 @@
 package com.example.fantasy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,11 +30,18 @@ public class BasketballTeam {
     @Column(length = 100)
     private String city;
 
+    @Column(length = 255)
+    private String imageUrl;
+
+    @Column(length = 255)
+    private String jerseyUrl;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
 
     @OneToMany(mappedBy = "team")
     @Builder.Default
+    @JsonIgnore
     private Set<BasketballPlayer> players = new HashSet<>();
 }

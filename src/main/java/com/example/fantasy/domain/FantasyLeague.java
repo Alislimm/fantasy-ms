@@ -31,6 +31,9 @@ public class FantasyLeague {
     @Column(length = 64, unique = true)
     private String inviteCode;
 
+    @Column(length = 5, unique = true)
+    private String joinCode;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "created_by_user_id", nullable = false)
     private User createdBy;

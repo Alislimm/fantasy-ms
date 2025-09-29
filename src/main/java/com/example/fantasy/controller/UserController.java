@@ -29,7 +29,6 @@ public class UserController {
         return ResponseEntity.ok(userService.register(req));
     }
 
-    // Deprecated: use /api/auth/login to obtain JWT
     @PostMapping("/login")
     public ResponseEntity<User> login(@Validated @RequestBody UserDtos.LoginRequest req) {
         return ResponseEntity.ok(userService.login(req));
@@ -48,5 +47,29 @@ public class UserController {
     @PostMapping("/transfer")
     public ResponseEntity<Transfer> transfer(@Validated @RequestBody FantasyDtos.TransferRequest req) {
         return ResponseEntity.ok(fantasyTeamService.makeTransfer(req));
+    }
+
+    @PostMapping("/squad/build")
+    public ResponseEntity<FantasyTeam> buildInitialSquad(@Validated @RequestBody FantasyDtos.SquadBuildRequest req) {
+        return ResponseEntity.ok(fantasyTeamService.buildSquad(req));
+    }
+
+    @GetMapping("/{userId}/has-fantasy-team")
+    public ResponseEntity<Boolean> hasFantasyTeam(@PathVariable Long userId) {
+        boolean hasTeam = userService.hasFantasyTeam(userId);
+        return ResponseEntity.ok(hasTeam);
+    }
+
+    @GetMapping("/{userId}/fantasy-team")
+    public ResponseEntity<FantasyTeam> getFantasyTeam(@PathVariable Long userId) {
+        FantasyTeam team = fantasyTeamService.getFantasyTeamByUserId(userId);
+        return ResponseEntity.ok(team);
+    }
+
+    // Additional mapping for plural form - handles /api/users/{id}/team
+    @GetMapping(value = "s/{userId}/team", produces = "application/json")
+    public ResponseEntity<FantasyTeam> getUserTeam(@PathVariable Long userId) {
+        FantasyTeam team = fantasyTeamService.getFantasyTeamByUserId(userId);
+        return ResponseEntity.ok(team);
     }
 }

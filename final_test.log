@@ -1,0 +1,66 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :resolveMainClassName UP-TO-DATE
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2025-09-21T09:04:07.939+03:00  INFO 3643 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Starting FantasyApplication using Java 17.0.14 with PID 3643 (/Users/Apple/Downloads/fantasy/build/classes/java/main started by Apple in /Users/Apple/Downloads/fantasy)
+2025-09-21T09:04:07.942+03:00  INFO 3643 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-09-21T09:04:08.378+03:00  INFO 3643 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-21T09:04:08.429+03:00  INFO 3643 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 17 JPA repository interfaces.
+2025-09-21T09:04:08.715+03:00  INFO 3643 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8083 (http)
+2025-09-21T09:04:08.726+03:00  INFO 3643 --- [fantasy] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-21T09:04:08.727+03:00  INFO 3643 --- [fantasy] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-09-21T09:04:08.773+03:00  INFO 3643 --- [fantasy] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-21T09:04:08.773+03:00  INFO 3643 --- [fantasy] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 812 ms
+2025-09-21T09:04:08.867+03:00  INFO 3643 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-21T09:04:08.974+03:00  INFO 3643 --- [fantasy] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1511d157
+2025-09-21T09:04:08.975+03:00  INFO 3643 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-21T09:04:14.059+03:00  INFO 3643 --- [fantasy] [           main] liquibase.database                       : Set default schema name to public
+2025-09-21T09:04:14.259+03:00  INFO 3643 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T09:04:14.319+03:00  INFO 3643 --- [fantasy] [           main] liquibase.ui                             : Database is up to date, no changesets to execute
+2025-09-21T09:04:14.320+03:00  INFO 3643 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : UPDATE SUMMARY
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : Run:                          0
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : Previously run:               9
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : Filtered out:                 0
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : -------------------------------
+2025-09-21T09:04:14.329+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : Total change sets:            9
+2025-09-21T09:04:14.330+03:00  INFO 3643 --- [fantasy] [           main] liquibase.util                           : Update summary generated
+2025-09-21T09:04:14.330+03:00  INFO 3643 --- [fantasy] [           main] liquibase.command                        : Command execution complete
+2025-09-21T09:04:15.783+03:00  INFO 3643 --- [fantasy] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-21T09:04:15.806+03:00  INFO 3643 --- [fantasy] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-09-21T09:04:15.821+03:00  INFO 3643 --- [fantasy] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-21T09:04:15.951+03:00  INFO 3643 --- [fantasy] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-21T09:04:15.992+03:00  INFO 3643 --- [fantasy] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-21T09:04:16.578+03:00  INFO 3643 --- [fantasy] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-21T09:04:16.603+03:00  INFO 3643 --- [fantasy] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-21T09:04:16.797+03:00  INFO 3643 --- [fantasy] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-21T09:04:17.222+03:00  WARN 3643 --- [fantasy] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-21T09:04:17.600+03:00  INFO 3643 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8083 (http) with context path '/'
+2025-09-21T09:04:17.609+03:00  INFO 3643 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Started FantasyApplication in 9.874 seconds (process running for 10.064)
+2025-09-21T09:04:35.613+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-21T09:04:35.613+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-21T09:04:35.614+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-21T09:04:35.628+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Request][2025-09-21 09:04:35] GET /api/players | Headers: host=localhost:8083, user-agent=curl/8.7.1, accept=*/*
+2025-09-21T09:04:35.796+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:04:35] GET /api/players | Status: 200 | Duration: 170ms
+2025-09-21T09:04:35.797+03:00  INFO 3643 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:04:35] Body: [Response body too large - 6708 chars]

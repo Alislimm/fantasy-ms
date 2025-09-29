@@ -13,6 +13,10 @@ import java.util.Optional;
 public interface FantasyLeagueTeamRepository extends JpaRepository<FantasyLeagueTeam, Long> {
     Optional<FantasyLeagueTeam> findByLeagueAndTeam(FantasyLeague league, FantasyTeam team);
     
+    List<FantasyLeagueTeam> findByTeam(FantasyTeam team);
+    
+    List<FantasyLeagueTeam> findByLeagueOrderByTotalPointsDesc(FantasyLeague league);
+    
     @Query("SELECT flt.team.id FROM FantasyLeagueTeam flt WHERE flt.league.id = :leagueId")
     List<Long> findTeamIdsByLeagueId(@Param("leagueId") Long leagueId);
 }

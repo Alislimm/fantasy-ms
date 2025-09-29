@@ -20,11 +20,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/user/register", "/api/user/login", "/api/auth/login").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/players/**", "/api/gameweek/**").permitAll()
-                    .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             )
             .httpBasic(Customizer.withDefaults());
 

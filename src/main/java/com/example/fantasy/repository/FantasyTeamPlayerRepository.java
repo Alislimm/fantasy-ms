@@ -12,7 +12,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface FantasyTeamPlayerRepository extends JpaRepository<FantasyTeamPlayer, Long> {
-    List<FantasyTeamPlayer> findByFantasyTeamAndActiveTrue(FantasyTeam team);
+    @Query("SELECT tp FROM FantasyTeamPlayer tp JOIN FETCH tp.player WHERE tp.fantasyTeam = :team AND tp.active = true")
+    List<FantasyTeamPlayer> findByFantasyTeamAndActiveTrue(@Param("team") FantasyTeam team);
+
     Optional<FantasyTeamPlayer> findByFantasyTeamAndPlayerAndActiveTrue(FantasyTeam team, BasketballPlayer player);
 
     @Query("select count(distinct tp.fantasyTeam.id) from FantasyTeamPlayer tp where tp.active = true and tp.player.id = :playerId")

@@ -35,7 +35,9 @@ public class TeamController {
                 team.getId(),
                 team.getName(),
                 team.getShortName(),
-                team.getCity()
+                team.getCity(),
+                team.getImageUrl(),
+                team.getJerseyUrl()
             )
         ).collect(Collectors.toList());
         
@@ -49,23 +51,26 @@ public class TeamController {
                     team.getId(),
                     team.getName(),
                     team.getShortName(),
-                    team.getCity()
+                    team.getCity(),
+                    team.getImageUrl(),
+                    team.getJerseyUrl()
                 ))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/players")
-    public ResponseEntity<List<TeamPlayerItem>> getTeamPlayers(@PathVariable Long id) {
-        // Check if team exists
-        if (!teamRepo.existsById(id)) {
+    public ResponseEntity<TeamWithPlayersResponse> getTeamPlayers(@PathVariable Long id) {
+        // Get team information
+        BasketballTeam team = teamRepo.findById(id).orElse(null);
+        if (team == null) {
             return ResponseEntity.notFound().build();
         }
         
         // Get all active players for this team
         List<BasketballPlayer> players = playerRepo.findByTeamIdAndActiveTrue(id);
         
-        List<TeamPlayerItem> result = players.stream().map(player -> 
+        List<TeamPlayerItem> playerItems = players.stream().map(player -> 
             new TeamPlayerItem(
                 player.getId(),
                 player.getFirstName(),
@@ -76,7 +81,19 @@ public class TeamController {
             )
         ).collect(Collectors.toList());
         
-        return ResponseEntity.ok(result);
+        TeamWithPlayersResponse response = new TeamWithPlayersResponse(
+            new TeamListItem(
+                team.getId(),
+                team.getName(),
+                team.getShortName(),
+                team.getCity(),
+                team.getImageUrl(),
+                team.getJerseyUrl()
+            ),
+            playerItems
+        );
+        
+        return ResponseEntity.ok(response);
     }
 
     public static class TeamListItem {
@@ -84,12 +101,16 @@ public class TeamController {
         public String name;
         public String shortName;
         public String city;
+        public String imageUrl;
+        public String jerseyUrl;
 
-        public TeamListItem(Long id, String name, String shortName, String city) {
+        public TeamListItem(Long id, String name, String shortName, String city, String imageUrl, String jerseyUrl) {
             this.id = id;
             this.name = name;
             this.shortName = shortName;
             this.city = city;
+            this.imageUrl = imageUrl;
+            this.jerseyUrl = jerseyUrl;
         }
     }
 
@@ -108,6 +129,16 @@ public class TeamController {
             this.position = position;
             this.price = price;
             this.nationality = nationality;
+        }
+    }
+
+    public static class TeamWithPlayersResponse {
+        public TeamListItem team;
+        public List<TeamPlayerItem> players;
+
+        public TeamWithPlayersResponse(TeamListItem team, List<TeamPlayerItem> players) {
+            this.team = team;
+            this.players = players;
         }
     }
 }

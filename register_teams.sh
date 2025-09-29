@@ -89,4 +89,40 @@ curl -X POST "$BASE_URL" \
   }'
 echo ""
 
+# Team 8: Riyadi
+echo "Creating team: Riyadi"
+curl -X POST "$BASE_URL" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "name": "Riyadi",
+    "shortName": "RIY",
+    "city": "Beirut"
+  }'
+echo ""
+
+# Team 9: Sagesse
+echo "Creating team: Sagesse"
+curl -X POST "$BASE_URL" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "name": "Sagesse",
+    "shortName": "SAG",
+    "city": "Beirut"
+  }'
+echo ""
+
+# Team 10: Beirut
+echo "Creating team: Beirut"
+curl -X POST "$BASE_URL" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "name": "Beirut",
+    "shortName": "BEI",
+    "city": "Beirut"
+  }'
+echo ""
+
 echo "All teams registered successfully!"

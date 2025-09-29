@@ -31,7 +31,7 @@ public class BasketballPlayer {
     @Column(nullable = false, length = 5)
     private PlayerPosition position;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "team_id", nullable = false)
     private BasketballTeam team;
 

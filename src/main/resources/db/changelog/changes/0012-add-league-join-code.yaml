@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-league-join-code
+      author: system
+      changes:
+        - addColumn:
+            tableName: fantasy_league
+            columns:
+              - column:
+                  name: join_code
+                  type: VARCHAR(5)
+                  constraints:
+                    unique: true
+                    nullable: true

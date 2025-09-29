@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0009-add-basketball-team-jersey-url
+      author: junie
+      changes:
+        - addColumn:
+            tableName: basketball_team
+            columns:
+              - column:
+                  name: jersey_url
+                  type: VARCHAR(255)

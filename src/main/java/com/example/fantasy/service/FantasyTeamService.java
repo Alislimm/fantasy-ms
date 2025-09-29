@@ -7,6 +7,8 @@ import com.example.fantasy.exception.ValidationException;
 import com.example.fantasy.repository.*;
 import com.example.fantasy.util.LineupUtil;
 import com.example.fantasy.util.TransferUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +21,8 @@ import java.util.Set;
 @Service
 @Transactional
 public class FantasyTeamService {
+
+    private static final Logger logger = LoggerFactory.getLogger(FantasyTeamService.class);
 
     private final FantasyTeamRepository teamRepo;
     private final UserService userService;
@@ -69,9 +73,7 @@ public class FantasyTeamService {
         t.setTransfersRemaining(1);
         t = teamRepo.save(t);
 
-        // Update user's hasFantasyTeam flag
-        owner.setHasFantasyTeam(true);
-        userService.save(owner);
+        // Note: hasFantasyTeam flag will be set only after successful squad build
 
         // Auto-join leagues: overall, favourite team, nationality
         ensureAndJoinLeagues(owner, t);
@@ -160,7 +162,10 @@ public class FantasyTeamService {
 
         // Ensure players are in team squad (active)
         List<FantasyTeamPlayer> active = teamPlayerRepo.findByFantasyTeamAndActiveTrue(team);
-        Set<Long> activePlayerIds = active.stream().map(tp -> tp.getPlayer().getId()).collect(java.util.stream.Collectors.toSet());
+        Set<Long> activePlayerIds = active.stream()
+                .filter(tp -> tp.getPlayer() != null && tp.getPlayer().getId() != null)
+                .map(tp -> tp.getPlayer().getId())
+                .collect(java.util.stream.Collectors.toSet());
         for (Long pid : all) {
             if (!activePlayerIds.contains(pid)) {
                 throw new ValidationException("Player " + pid + " not in team squad");
@@ -211,6 +216,7 @@ public class FantasyTeamService {
         BasketballPlayer in = playerRepo.findById(req.playerInId()).orElseThrow(() -> new NotFoundException("Player in not found"));
 
         // ensure 'out' is in team and active; ensure 'in' not already in team active
+        // todo : check commented code from repo
         FantasyTeamPlayer outLink = teamPlayerRepo.findByFantasyTeamAndPlayerAndActiveTrue(team, out)
                 .orElseThrow(() -> new ValidationException("Player out not in active squad"));
         if (teamPlayerRepo.findByFantasyTeamAndPlayerAndActiveTrue(team, in).isPresent()) {
@@ -256,5 +262,159 @@ public class FantasyTeamService {
         }
 
         return transfer;
+    }
+
+    public FantasyTeam buildInitialSquad(FantasyDtos.InitialSquadBuildRequest req) {
+        logger.info("[SQUAD_BUILD] Starting initial squad build for fantasyTeamId: {}, playerIds: {}", 
+                    req.fantasyTeamId(), req.playerIds());
+        
+        try {
+            // Find team
+            logger.debug("[SQUAD_BUILD] Looking up team with ID: {}", req.fantasyTeamId());
+            FantasyTeam team = teamRepo.findById(req.fantasyTeamId())
+                    .orElseThrow(() -> new NotFoundException("Team not found"));
+            logger.debug("[SQUAD_BUILD] Found team: {} (Owner: {})", team.getTeamName(), team.getOwner().getUsername());
+            
+            // Ensure team has empty squad
+            logger.debug("[SQUAD_BUILD] Checking existing squad for team: {}", req.fantasyTeamId());
+            List<FantasyTeamPlayer> existingPlayers = teamPlayerRepo.findByFantasyTeamAndActiveTrue(team);
+            logger.debug("[SQUAD_BUILD] Found {} existing active players in squad", existingPlayers.size());
+            if (!existingPlayers.isEmpty()) {
+                logger.warn("[SQUAD_BUILD] Team {} already has {} players in squad, rejecting request", 
+                           req.fantasyTeamId(), existingPlayers.size());
+                throw new ValidationException("Team already has players in squad. Initial squad building only allowed for empty teams.");
+            }
+            
+            // Validate player count (should be 8 for full squad)
+            logger.debug("[SQUAD_BUILD] Validating player count: {} (expected: 8)", req.playerIds().size());
+            if (req.playerIds().size() != 8) {
+                logger.warn("[SQUAD_BUILD] Invalid player count: {} (expected: 8)", req.playerIds().size());
+                throw new ValidationException("Initial squad must contain exactly 8 players");
+            }
+            
+            // Validate all players exist and calculate total cost
+            logger.debug("[SQUAD_BUILD] Validating players and calculating total cost");
+            BigDecimal totalCost = BigDecimal.ZERO;
+            for (Long playerId : req.playerIds()) {
+                logger.debug("[SQUAD_BUILD] Validating player ID: {}", playerId);
+                BasketballPlayer player = playerRepo.findById(playerId)
+                        .orElseThrow(() -> new NotFoundException("Player not found: " + playerId));
+                
+                if (!player.isActive()) {
+                    logger.warn("[SQUAD_BUILD] Player {} is not active", playerId);
+                    throw new ValidationException("Player " + playerId + " is not active");
+                }
+                
+                BigDecimal playerCost = player.getMarketValue() == null ? BigDecimal.ZERO : player.getMarketValue();
+                totalCost = totalCost.add(playerCost);
+                logger.debug("[SQUAD_BUILD] Player {} ({} {}) cost: {}, running total: {}", 
+                           playerId, player.getFirstName(), player.getLastName(), playerCost, totalCost);
+            }
+            
+            // Check budget
+            logger.debug("[SQUAD_BUILD] Checking budget: totalCost={}, teamBudget={}", totalCost, team.getBudget());
+            if (totalCost.compareTo(team.getBudget()) > 0) {
+                logger.warn("[SQUAD_BUILD] Budget exceeded: totalCost={}, teamBudget={}", totalCost, team.getBudget());
+                throw new ValidationException("Total player cost (" + totalCost + ") exceeds team budget (" + team.getBudget() + ")");
+            }
+            
+            // Create FantasyTeamPlayer records for all players
+            logger.debug("[SQUAD_BUILD] Creating FantasyTeamPlayer records for {} players", req.playerIds().size());
+            for (Long playerId : req.playerIds()) {
+                logger.debug("[SQUAD_BUILD] Creating FantasyTeamPlayer record for player: {}", playerId);
+                BasketballPlayer player = playerRepo.findById(playerId).get(); // Already validated above
+                
+                FantasyTeamPlayer teamPlayer = new FantasyTeamPlayer();
+                teamPlayer.setFantasyTeam(team);
+                teamPlayer.setPlayer(player);
+                teamPlayer.setActive(true);
+                teamPlayer.setAcquiredAt(Instant.now());
+                teamPlayer.setPurchasePrice(player.getMarketValue() == null ? BigDecimal.ZERO : player.getMarketValue());
+                
+                try {
+                    teamPlayerRepo.save(teamPlayer);
+                    logger.debug("[SQUAD_BUILD] Successfully saved FantasyTeamPlayer for player: {}", playerId);
+                } catch (Exception e) {
+                    logger.error("[SQUAD_BUILD] Failed to save FantasyTeamPlayer for player: {}", playerId, e);
+                    throw e;
+                }
+            }
+            
+            // Update team budget
+            logger.debug("[SQUAD_BUILD] Updating team budget from {} to {}", 
+                        team.getBudget(), team.getBudget().subtract(totalCost));
+            team.setBudget(team.getBudget().subtract(totalCost));
+            
+            try {
+                teamRepo.save(team);
+                logger.debug("[SQUAD_BUILD] Successfully updated team budget");
+            } catch (Exception e) {
+                logger.error("[SQUAD_BUILD] Failed to update team budget", e);
+                throw e;
+            }
+            
+            logger.info("[SQUAD_BUILD] Successfully completed initial squad build for team: {} with {} players, total cost: {}", 
+                       team.getTeamName(), req.playerIds().size(), totalCost);
+            return team;
+            
+        } catch (Exception e) {
+            logger.error("[SQUAD_BUILD] Error during initial squad build for fantasyTeamId: {}, playerIds: {}", 
+                        req.fantasyTeamId(), req.playerIds(), e);
+            throw e;
+        }
+    }
+
+    public FantasyTeam buildSquad(FantasyDtos.SquadBuildRequest req) {
+        logger.info("[SQUAD_BUILD] Starting squad build for teamName: {}, ownerUserId: {}", 
+                    req.teamName(), req.ownerUserId());
+        
+        try {
+            // First create the fantasy team
+            FantasyDtos.FantasyTeamCreateRequest createRequest = 
+                new FantasyDtos.FantasyTeamCreateRequest(req.teamName(), req.ownerUserId());
+            FantasyTeam team = createTeam(createRequest);
+            
+            // Combine starters and bench into playerIds list
+            List<Long> allPlayerIds = new java.util.ArrayList<>();
+            allPlayerIds.addAll(req.starters());
+            allPlayerIds.addAll(req.bench());
+            
+            // Build the initial squad with all players
+            FantasyDtos.InitialSquadBuildRequest squadRequest = 
+                new FantasyDtos.InitialSquadBuildRequest(team.getId(), allPlayerIds);
+            team = buildInitialSquad(squadRequest);
+            
+            // Only set hasFantasyTeam flag after successful squad build
+            User owner = team.getOwner();
+            owner.setHasFantasyTeam(true);
+            userService.save(owner);
+            
+            logger.info("[SQUAD_BUILD] Successfully completed squad build for team: {} with captain: {}, vice-captain: {}", 
+                       team.getTeamName(), req.captainPlayerId(), req.viceCaptainPlayerId());
+            return team;
+            
+        } catch (Exception e) {
+            logger.error("[SQUAD_BUILD] Error during squad build for teamName: {}, ownerUserId: {}", 
+                        req.teamName(), req.ownerUserId(), e);
+            throw e;
+        }
+    }
+
+    public FantasyTeam getFantasyTeamByUserId(Long userId) {
+        User user = userService.getUser(userId);
+        
+        // Check if user has a fantasy team
+        if (!user.isHasFantasyTeam()) {
+            throw new NotFoundException("User does not have a fantasy team");
+        }
+        
+        // Find the user's fantasy team
+        List<FantasyTeam> teams = teamRepo.findByOwner(user);
+        if (teams.isEmpty()) {
+            throw new NotFoundException("Fantasy team not found for user");
+        }
+        
+        // Return the first (and should be only) fantasy team for this user
+        return teams.get(0);
     }
 }

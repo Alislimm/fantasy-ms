@@ -31,4 +31,10 @@ public class InvitationController {
     public ResponseEntity<LeagueInvitation> decline(@PathVariable String token) {
         return ResponseEntity.ok(invitationService.respond(token, false));
     }
+
+    @GetMapping("/join/{inviteCode}")
+    public ResponseEntity<String> joinLeagueByCode(@PathVariable String inviteCode) {
+        invitationService.joinLeagueByInviteCode(inviteCode);
+        return ResponseEntity.ok("Successfully joined the league!");
+    }
 }

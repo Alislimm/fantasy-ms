@@ -1,0 +1,77 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :resolveMainClassName
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2025-09-21T09:01:38.140+03:00  INFO 1456 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Starting FantasyApplication using Java 17.0.14 with PID 1456 (/Users/Apple/Downloads/fantasy/build/classes/java/main started by Apple in /Users/Apple/Downloads/fantasy)
+2025-09-21T09:01:38.142+03:00  INFO 1456 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-09-21T09:01:38.685+03:00  INFO 1456 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-21T09:01:38.755+03:00  INFO 1456 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 17 JPA repository interfaces.
+2025-09-21T09:01:39.130+03:00  INFO 1456 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8083 (http)
+2025-09-21T09:01:39.139+03:00  INFO 1456 --- [fantasy] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-21T09:01:39.139+03:00  INFO 1456 --- [fantasy] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-09-21T09:01:39.171+03:00  INFO 1456 --- [fantasy] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-21T09:01:39.171+03:00  INFO 1456 --- [fantasy] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1005 ms
+2025-09-21T09:01:39.256+03:00  INFO 1456 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-21T09:01:39.386+03:00  INFO 1456 --- [fantasy] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3a11c0eb
+2025-09-21T09:01:39.387+03:00  INFO 1456 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-21T09:01:44.473+03:00  INFO 1456 --- [fantasy] [           main] liquibase.database                       : Set default schema name to public
+2025-09-21T09:01:44.680+03:00  INFO 1456 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T09:01:44.790+03:00  INFO 1456 --- [fantasy] [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2025-09-21T09:01:44.791+03:00  INFO 1456 --- [fantasy] [           main] liquibase.command                        : Using deploymentId: 8434499242
+2025-09-21T09:01:44.795+03:00  INFO 1456 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T09:01:44.801+03:00  INFO 1456 --- [fantasy] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/0010-fix-match-status-enum.yaml::0010-fix-match-status-enum::junie
+2025-09-21T09:01:44.810+03:00  INFO 1456 --- [fantasy] [           main] liquibase.changelog                      : Custom SQL executed
+2025-09-21T09:01:44.814+03:00  INFO 1456 --- [fantasy] [           main] liquibase.changelog                      : Custom SQL executed
+2025-09-21T09:01:44.815+03:00  INFO 1456 --- [fantasy] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/0010-fix-match-status-enum.yaml::0010-fix-match-status-enum::junie ran successfully in 14ms
+2025-09-21T09:01:44.821+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : UPDATE SUMMARY
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : Run:                          1
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : Previously run:               8
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : Filtered out:                 0
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : -------------------------------
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : Total change sets:            9
+2025-09-21T09:01:44.822+03:00  INFO 1456 --- [fantasy] [           main] liquibase.util                           : Update summary generated
+2025-09-21T09:01:44.823+03:00  INFO 1456 --- [fantasy] [           main] liquibase.command                        : Update command completed successfully.
+2025-09-21T09:01:44.823+03:00  INFO 1456 --- [fantasy] [           main] liquibase.ui                             : Liquibase: Update has been successful. Rows affected: 6
+2025-09-21T09:01:44.825+03:00  INFO 1456 --- [fantasy] [           main] liquibase.lockservice                    : Successfully released change log lock
+2025-09-21T09:01:44.826+03:00  INFO 1456 --- [fantasy] [           main] liquibase.command                        : Command execution complete
+2025-09-21T09:01:46.419+03:00  INFO 1456 --- [fantasy] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-21T09:01:46.443+03:00  INFO 1456 --- [fantasy] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-09-21T09:01:46.457+03:00  INFO 1456 --- [fantasy] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-21T09:01:46.587+03:00  INFO 1456 --- [fantasy] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-21T09:01:46.623+03:00  INFO 1456 --- [fantasy] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-21T09:01:47.199+03:00  INFO 1456 --- [fantasy] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-21T09:01:47.229+03:00  INFO 1456 --- [fantasy] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-21T09:01:47.445+03:00  INFO 1456 --- [fantasy] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-21T09:01:47.898+03:00  WARN 1456 --- [fantasy] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-21T09:01:48.292+03:00  INFO 1456 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8083 (http) with context path '/'
+2025-09-21T09:01:48.300+03:00  INFO 1456 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Started FantasyApplication in 10.367 seconds (process running for 10.542)
+2025-09-21T09:02:03.153+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-21T09:02:03.154+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-21T09:02:03.155+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-21T09:02:03.171+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Request][2025-09-21 09:02:03] GET /api/gameweek/1/fixtures/formatted | Headers: host=localhost:8083, user-agent=curl/8.7.1, accept=*/*
+2025-09-21T09:02:03.303+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:02:03] GET /api/gameweek/1/fixtures/formatted | Status: 200 | Duration: 134ms
+2025-09-21T09:02:03.303+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-1] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:02:03] Body: ["[Beirut BC,A Riyadi FC]","[Antranik,Atlas]","[NSA,Byblos]","[Sporting Al Mouttahed,Champville]","[Sagesse ,Hoops]"]
+2025-09-21T09:02:15.168+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-2] c.e.fantasy.config.ApiLoggingFilter      : [API][Request][2025-09-21 09:02:15] GET /api/players | Headers: host=localhost:8083, user-agent=curl/8.7.1, accept=*/*
+2025-09-21T09:02:15.246+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-2] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:02:15] GET /api/players | Status: 200 | Duration: 78ms
+2025-09-21T09:02:15.246+03:00  INFO 1456 --- [fantasy] [nio-8083-exec-2] c.e.fantasy.config.ApiLoggingFilter      : [API][Response][2025-09-21 09:02:15] Body: [Response body too large - 6708 chars]

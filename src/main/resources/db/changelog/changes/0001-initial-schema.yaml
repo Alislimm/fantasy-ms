@@ -2,6 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: 0001-initial
       author: junie
+      validCheckSum: 9:4729bb59a7b35e71acdef27af224cab5
       changes:
         - createTable:
             tableName: users
@@ -65,8 +66,7 @@ databaseChangeLog:
               - column: {name: home_team_id, type: BIGINT, constraints: {nullable: false}}
               - column: {name: away_team_id, type: BIGINT, constraints: {nullable: false}}
               - column: {name: kickoff, type: TIMESTAMP WITH TIME ZONE, constraints: {nullable: false}}
-              - column: {name: home_score, type: INT}
-              - column: {name: away_score, type: INT}
+              - column: {name: score, type: VARCHAR(255)}
               - column: {name: venue, type: VARCHAR(255)}
               - column: {name: status, type: VARCHAR(20), constraints: {nullable: false}}
         - addForeignKeyConstraint:

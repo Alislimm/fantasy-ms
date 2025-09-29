@@ -9,3 +9,15 @@ databaseChangeLog:
       file: db/changelog/changes/0004-enhanced-scoring-rules.yaml
   - include:
       file: db/changelog/changes/0005-user-fantasy-team-restriction.yaml
+  - include:
+      file: db/changelog/changes/0007-fix-checksum-validation.yaml
+  - include:
+      file: db/changelog/changes/0008-migrate-match-score-columns.yaml
+  - include:
+      file: db/changelog/changes/0009-add-basketball-team-image-url.yaml
+  - include:
+      file: db/changelog/changes/0010-fix-match-status-enum.yaml
+  - include:
+      file: db/changelog/changes/0011-add-basketball-team-jersey-url.yaml
+  - include:
+      file: db/changelog/changes/0012-add-league-join-code.yaml

@@ -27,4 +27,18 @@ public class FantasyDtos {
             @NotNull List<Long> bench,    // 3 players
             Long captainPlayerId // optional, must be among starters
     ) {}
+
+    public record InitialSquadBuildRequest(
+            @NotNull Long fantasyTeamId,
+            @NotNull List<Long> playerIds // 8 players for initial squad
+    ) {}
+
+    public record SquadBuildRequest(
+            @NotBlank String teamName,
+            @NotNull Long ownerUserId,
+            @NotNull List<Long> starters, // 5 players
+            @NotNull List<Long> bench,    // 3 players
+            @NotNull Long captainPlayerId,
+            @NotNull Long viceCaptainPlayerId
+    ) {}
 }

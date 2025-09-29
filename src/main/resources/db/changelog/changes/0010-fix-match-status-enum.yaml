@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0010-fix-match-status-enum
+      author: junie
+      changes:
+        - sql:
+            sql: "UPDATE match SET status = 'SCHEDULED' WHERE status IS NULL OR status NOT IN ('SCHEDULED', 'IN_PROGRESS', 'FINISHED', 'POSTPONED');"
+        - sql:
+            sql: "ALTER TABLE match ALTER COLUMN status SET DEFAULT 'SCHEDULED';"

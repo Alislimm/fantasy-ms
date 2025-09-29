@@ -61,4 +61,9 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    public boolean hasFantasyTeam(Long userId) {
+        User user = getUser(userId);
+        return user.isHasFantasyTeam();
+    }
 }

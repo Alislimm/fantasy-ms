@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0006-fix-checksum
+      author: junie
+      failOnError: false
+      changes:
+        - sql:
+            sql: |
+              UPDATE databasechangelog 
+              SET md5sum = '9:4729bb59a7b35e71acdef27af224cab5' 
+              WHERE id = '0001-initial' AND author = 'junie';
+      rollback:
+        - sql:
+            sql: |
+              UPDATE databasechangelog 
+              SET md5sum = '9:5af60b0940c2f6cf2d2fa8d451491251' 
+              WHERE id = '0001-initial' AND author = 'junie';

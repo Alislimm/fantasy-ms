@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0008-migrate-match-score-columns
+      author: junie
+      changes:
+        - dropColumn:
+            tableName: match
+            columnName: home_score
+        - dropColumn:
+            tableName: match
+            columnName: away_score
+        - addColumn:
+            tableName: match
+            columns:
+              - column:
+                  name: score
+                  type: VARCHAR(255)

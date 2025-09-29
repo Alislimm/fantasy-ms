@@ -76,11 +76,10 @@ public class AdminGameOpsController {
     }
 
     @PutMapping("/matches/{id}")
-    public ResponseEntity<Match> updateMatchScore(@PathVariable Long id, @RequestParam Integer homeScore, @RequestParam Integer awayScore,
+    public ResponseEntity<Match> updateMatchScore(@PathVariable Long id, @RequestParam String score,
                                                   @RequestParam(required=false) String status) {
         Match m = matchRepo.findById(id).orElseThrow(() -> new NotFoundException("Match not found"));
-        m.setHomeScore(homeScore);
-        m.setAwayScore(awayScore);
+        m.setScore(score);
         if (status != null) m.setStatus(MatchStatus.valueOf(status));
         return ResponseEntity.ok(matchRepo.save(m));
     }

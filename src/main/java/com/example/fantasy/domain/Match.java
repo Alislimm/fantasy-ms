@@ -33,8 +33,7 @@ public class Match {
     @Column(nullable = false)
     private Instant kickoff;
 
-    private Integer homeScore;
-    private Integer awayScore;
+    private String score;
 
     private String venue;
 

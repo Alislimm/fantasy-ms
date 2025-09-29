@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "game_week", uniqueConstraints = @UniqueConstraint(columnNames = {"number"}))
@@ -27,4 +29,8 @@ public class GameWeek {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private GameWeekStatus status;
+
+    @OneToMany(mappedBy = "gameWeek", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Match> fixtures = new ArrayList<>();
 }

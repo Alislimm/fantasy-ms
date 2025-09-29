@@ -1,5 +1,6 @@
 package com.example.fantasy.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class FantasyTeamPlayer {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "fantasy_team_id", nullable = false)
+    @JsonIgnore
     private FantasyTeam fantasyTeam;
 
     @ManyToOne(optional = false)

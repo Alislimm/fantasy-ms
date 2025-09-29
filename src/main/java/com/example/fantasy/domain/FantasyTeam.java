@@ -48,7 +48,7 @@ public class FantasyTeam {
     @UpdateTimestamp
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "fantasyTeam", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "fantasyTeam", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @Builder.Default
     private Set<FantasyTeamPlayer> squad = new HashSet<>();
 }

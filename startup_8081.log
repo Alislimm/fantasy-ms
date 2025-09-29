@@ -1,0 +1,120 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :resolveMainClassName UP-TO-DATE
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2025-09-21T01:17:39.701+03:00  INFO 88188 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Starting FantasyApplication using Java 17.0.14 with PID 88188 (/Users/Apple/Downloads/fantasy/build/classes/java/main started by Apple in /Users/Apple/Downloads/fantasy)
+2025-09-21T01:17:39.703+03:00  INFO 88188 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-09-21T01:17:40.135+03:00  INFO 88188 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-21T01:17:40.179+03:00  INFO 88188 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 17 JPA repository interfaces.
+2025-09-21T01:17:40.442+03:00  INFO 88188 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-09-21T01:17:40.449+03:00  INFO 88188 --- [fantasy] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-21T01:17:40.449+03:00  INFO 88188 --- [fantasy] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-09-21T01:17:40.479+03:00  INFO 88188 --- [fantasy] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-21T01:17:40.479+03:00  INFO 88188 --- [fantasy] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 755 ms
+2025-09-21T01:17:40.555+03:00  INFO 88188 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-21T01:17:40.646+03:00  INFO 88188 --- [fantasy] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3a11c0eb
+2025-09-21T01:17:40.647+03:00  INFO 88188 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-21T01:17:45.730+03:00  INFO 88188 --- [fantasy] [           main] liquibase.database                       : Set default schema name to public
+2025-09-21T01:17:45.939+03:00  INFO 88188 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T01:17:45.995+03:00  INFO 88188 --- [fantasy] [           main] liquibase.ui                             : Database is up to date, no changesets to execute
+2025-09-21T01:17:45.996+03:00  INFO 88188 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : UPDATE SUMMARY
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : Run:                          0
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : Previously run:               8
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : Filtered out:                 0
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : -------------------------------
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : Total change sets:            8
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.util                           : Update summary generated
+2025-09-21T01:17:46.001+03:00  INFO 88188 --- [fantasy] [           main] liquibase.command                        : Command execution complete
+2025-09-21T01:17:47.580+03:00  INFO 88188 --- [fantasy] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-21T01:17:47.602+03:00  INFO 88188 --- [fantasy] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-09-21T01:17:47.618+03:00  INFO 88188 --- [fantasy] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-21T01:17:47.746+03:00  INFO 88188 --- [fantasy] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-21T01:17:47.782+03:00  INFO 88188 --- [fantasy] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-21T01:17:48.351+03:00  INFO 88188 --- [fantasy] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-21T01:17:48.384+03:00  INFO 88188 --- [fantasy] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-21T01:17:48.578+03:00  INFO 88188 --- [fantasy] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-09-21T01:17:48.982+03:00  WARN 88188 --- [fantasy] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-21T01:17:49.307+03:00  WARN 88188 --- [fantasy] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-09-21T01:17:49.309+03:00  INFO 88188 --- [fantasy] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-21T01:17:49.310+03:00  INFO 88188 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-21T01:17:49.311+03:00  INFO 88188 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-21T01:17:49.319+03:00  INFO 88188 --- [fantasy] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-21T01:17:49.327+03:00 ERROR 88188 --- [fantasy] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+
+> Task :bootRun FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':bootRun'.
+> Process 'command '/Users/Apple/Library/Java/JavaVirtualMachines/jbr-17.0.14/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 15s
+4 actionable tasks: 1 executed, 3 up-to-date
+Exception in thread "Thread-3" org.gradle.api.UncheckedIOException: java.io.IOException: Input/output error
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:63)
+	at org.gradle.internal.UncheckedException.throwAsUncheckedException(UncheckedException.java:42)
+	at org.gradle.internal.daemon.client.clientinput.DaemonClientInputForwarder$ForwardingUserInput.lambda$readAndForwardStdin$0(DaemonClientInputForwarder.java:99)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.io.IOException: Input/output error
+	at java.base/java.io.FileInputStream.readBytes(Native Method)
+	at java.base/java.io.FileInputStream.read(FileInputStream.java:287)
+	at java.base/java.io.BufferedInputStream.read1(BufferedInputStream.java:345)
+	at java.base/java.io.BufferedInputStream.implRead(BufferedInputStream.java:420)
+	at java.base/java.io.BufferedInputStream.read(BufferedInputStream.java:399)
+	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:350)
+	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:393)
+	at java.base/sun.nio.cs.StreamDecoder.lockedRead(StreamDecoder.java:217)
+	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:171)
+	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:188)
+	at java.base/java.io.BufferedReader.read1(BufferedReader.java:223)
+	at java.base/java.io.BufferedReader.implRead(BufferedReader.java:314)
+	at java.base/java.io.BufferedReader.read(BufferedReader.java:296)
+	at java.base/java.io.Reader.read(Reader.java:265)
+	at org.gradle.internal.daemon.client.clientinput.DaemonClientInputForwarder$ForwardingUserInput.lambda$readAndForwardStdin$0(DaemonClientInputForwarder.java:97)
+	... 3 more

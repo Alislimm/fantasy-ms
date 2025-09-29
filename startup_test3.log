@@ -1,0 +1,130 @@
+> Task :compileJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+> Task :resolveMainClassName
+
+> Task :bootRun
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2025-09-20T18:13:37.351+03:00  INFO 49854 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : Starting FantasyApplication using Java 17.0.14 with PID 49854 (/Users/Apple/Downloads/fantasy/build/classes/java/main started by Apple in /Users/Apple/Downloads/fantasy)
+2025-09-20T18:13:37.353+03:00  INFO 49854 --- [fantasy] [           main] com.example.fantasy.FantasyApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-09-20T18:13:37.826+03:00  INFO 49854 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-20T18:13:37.888+03:00  INFO 49854 --- [fantasy] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 17 JPA repository interfaces.
+2025-09-20T18:13:38.203+03:00  INFO 49854 --- [fantasy] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-20T18:13:38.212+03:00  INFO 49854 --- [fantasy] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-20T18:13:38.212+03:00  INFO 49854 --- [fantasy] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-09-20T18:13:38.241+03:00  INFO 49854 --- [fantasy] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-20T18:13:38.242+03:00  INFO 49854 --- [fantasy] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 871 ms
+2025-09-20T18:13:38.324+03:00  INFO 49854 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-20T18:13:38.426+03:00  INFO 49854 --- [fantasy] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24a0c58b
+2025-09-20T18:13:38.427+03:00  INFO 49854 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-20T18:13:43.523+03:00  INFO 49854 --- [fantasy] [           main] liquibase.database                       : Set default schema name to public
+2025-09-20T18:13:43.734+03:00  INFO 49854 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-20T18:13:43.801+03:00  INFO 49854 --- [fantasy] [           main] liquibase.lockservice                    : Successfully acquired change log lock
+2025-09-20T18:13:43.801+03:00  INFO 49854 --- [fantasy] [           main] liquibase.command                        : Using deploymentId: 8381218313
+2025-09-20T18:13:43.802+03:00  INFO 49854 --- [fantasy] [           main] liquibase.changelog                      : Reading from public.databasechangelog
+2025-09-20T18:13:43.806+03:00  INFO 49854 --- [fantasy] [           main] liquibase.ui                             : Running Changeset: db/changelog/changes/0007-fix-checksum-validation.yaml::0007-fix-checksum-validation::junie
+2025-09-20T18:13:43.813+03:00  INFO 49854 --- [fantasy] [           main] liquibase.changelog                      : Custom SQL executed
+2025-09-20T18:13:43.814+03:00  INFO 49854 --- [fantasy] [           main] liquibase.changelog                      : ChangeSet db/changelog/changes/0007-fix-checksum-validation.yaml::0007-fix-checksum-validation::junie ran successfully in 6ms
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : UPDATE SUMMARY
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : Run:                          1
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : Previously run:               5
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : Filtered out:                 0
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : -------------------------------
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : Total change sets:            6
+2025-09-20T18:13:43.819+03:00  INFO 49854 --- [fantasy] [           main] liquibase.util                           : Update summary generated
+2025-09-20T18:13:43.820+03:00  INFO 49854 --- [fantasy] [           main] liquibase.command                        : Update command completed successfully.
+2025-09-20T18:13:43.820+03:00  INFO 49854 --- [fantasy] [           main] liquibase.ui                             : Liquibase: Update has been successful. Rows affected: 2
+2025-09-20T18:13:43.821+03:00  INFO 49854 --- [fantasy] [           main] liquibase.lockservice                    : Successfully released change log lock
+2025-09-20T18:13:43.822+03:00  INFO 49854 --- [fantasy] [           main] liquibase.command                        : Command execution complete
+2025-09-20T18:13:45.357+03:00  INFO 49854 --- [fantasy] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-20T18:13:45.380+03:00  INFO 49854 --- [fantasy] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-09-20T18:13:45.396+03:00  INFO 49854 --- [fantasy] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-20T18:13:45.530+03:00  INFO 49854 --- [fantasy] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-20T18:13:45.564+03:00  INFO 49854 --- [fantasy] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.6
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-20T18:13:46.164+03:00  INFO 49854 --- [fantasy] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-20T18:13:46.191+03:00 ERROR 49854 --- [fantasy] [           main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [score] in table [match]
+2025-09-20T18:13:46.191+03:00  WARN 49854 --- [fantasy] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [score] in table [match]
+2025-09-20T18:13:46.191+03:00  INFO 49854 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-20T18:13:46.192+03:00  INFO 49854 --- [fantasy] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-20T18:13:46.194+03:00  INFO 49854 --- [fantasy] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-09-20T18:13:46.203+03:00  INFO 49854 --- [fantasy] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-20T18:13:46.212+03:00 ERROR 49854 --- [fantasy] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [score] in table [match]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1826) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:607) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:529) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:339) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:373) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:337) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:207) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:970) ~[spring-context-6.2.9.jar:6.2.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:627) ~[spring-context-6.2.9.jar:6.2.9]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.4.jar:3.5.4]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.4.jar:3.5.4]
+	at com.example.fantasy.FantasyApplication.main(FantasyApplication.java:11) ~[main/:na]
+Caused by: jakarta.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [score] in table [match]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:431) ~[spring-orm-6.2.9.jar:6.2.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:400) ~[spring-orm-6.2.9.jar:6.2.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:366) ~[spring-orm-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1873) ~[spring-beans-6.2.9.jar:6.2.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1822) ~[spring-beans-6.2.9.jar:6.2.9]
+	... 15 common frames omitted
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema-validation: missing column [score] in table [match]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:149) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:46) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:99) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:77) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:289) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:144) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:141) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:37) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:35) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:324) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:463) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1517) ~[hibernate-core-6.6.22.Final.jar:6.6.22.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-6.2.9.jar:6.2.9]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:390) ~[spring-orm-6.2.9.jar:6.2.9]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:419) ~[spring-orm-6.2.9.jar:6.2.9]
+	... 19 common frames omitted
+
+
+> Task :bootRun FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':bootRun'.
+> Process 'command '/Users/Apple/Library/Java/JavaVirtualMachines/jbr-17.0.14/Contents/Home/bin/java'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 10s
+4 actionable tasks: 3 executed, 1 up-to-date
