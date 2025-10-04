@@ -1,7 +1,7 @@
 services:
   - type: web
     name: fantasy-ms
-    environment: docker
+    runtime: docker
     dockerfilePath: ./Dockerfile
     autoDeploy: true
     envVars:
