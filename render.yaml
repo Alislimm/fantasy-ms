@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: fantasy-ms
+    env: java
+    buildCommand: "./gradlew build -x test"
+    startCommand: "java -jar build/libs/fantasy-0.0.1-SNAPSHOT.jar"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
