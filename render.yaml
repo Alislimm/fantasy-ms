@@ -1,8 +1,9 @@
 services:
   - type: web
     name: fantasy-ms
-    buildCommand: "./gradlew build -x test"
-    startCommand: "java -jar build/libs/fantasy-0.0.1-SNAPSHOT.jar"
+    environment: docker
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
     envVars:
       - key: DATABASE_URL
         sync: false
