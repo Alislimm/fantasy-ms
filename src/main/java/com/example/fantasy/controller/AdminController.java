@@ -18,6 +18,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    //todo: add security
     @PostMapping("/teams")
     public ResponseEntity<BasketballTeam> createTeam(@Validated @RequestBody AdminDtos.TeamUpsertRequest req) {
         return ResponseEntity.ok(adminService.upsertTeam(null, req));
